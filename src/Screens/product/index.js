@@ -19,7 +19,7 @@ export default function Product({ items }) {
                     <Image source={{ uri: thumbnail }} style={styles.image} />
                     <View style={{ paddingTop: 5 , margin: 3}}>
                         <Text style={{ color: '#000', }}>{title.length < 23 ? title : title.substring(0, 20) + "..."}</Text>
-                        <Text style={{ color: '#000' }}>₹{price}</Text>
+                        <Text style={{ color: '#5e5e5e' }}>₹{price}</Text>
                     </View>
                 </View>
             </View>

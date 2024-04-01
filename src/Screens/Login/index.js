@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View,TextInput,TouchableOpacity,ToastAndroid, 
 import { useState } from "react";
 import { styles } from './style';
 import { useNavigation,StackActions} from '@react-navigation/native';
+import Snackbar from 'react-native-snackbar';
 
 export const Login=()=> {
 
@@ -13,28 +14,29 @@ export const Login=()=> {
     const [validPw, setValidPw] = useState(false);
     const [pwError,setPwError]=useState("");
     const navigation=useNavigation();
-    
+    const [fm,setFm]=useState(false);
     function onLogin(){
-
-      
 
       if(username==''){
         setValidUsername(true);
         setUsernameError("Please enter the username");
-      }else{
+      }
+      else{
         setValidUsername(false);
         setUsernameError("");
       }
       if(pw==''){
         setValidPw(true);
         setPwError("Please enter the password");
-      }else{
+      }
+      else{
         if(pw.length<8){
           setValidPw(true);
-        setPwError("Password should contains minimum 8 characters");
-        }else{
+          setPwError("Password should contains minimum 8 characters");
+        }
+        else{
           setValidPw(false);
-        setPwError("");
+          setPwError("");
         }
       }
       if(usernameError==""&&pwError==""){
@@ -42,35 +44,34 @@ export const Login=()=> {
         console.log(username);
         console.log(pw)
 
-        if(username=='riya'&&pw=='riya@1234'){
+        if(username.trim()=='Fenansi'&&pw.trim()=='Fenansi@1234'){
 
-          if (Platform.OS === 'android') {
-            ToastAndroid.showWithGravity(
-              'You\'re successfully Logged In. ',
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER,
-            );
+          
+            Snackbar.show({
+              text:"You\'re successfully Logged In.", 
+              duration:Snackbar.LENGTH_SHORT, 
+              rtl:true, 
+              backgroundColor:"#5c855b",
+          });
 
             navigation.dispatch(
               StackActions.replace('Home',{refresh:false})
             );
             
-            // navigation.navigate('Home')
-            // showAlert1();
-          } else {
-            AlertIOS.alert('You\'re successfully Logged In.');
-          }
-        }else{
-          if (Platform.OS === 'android') {
-            ToastAndroid.showWithGravity(
-              'Login failed.',
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER,
-            );
-          } else {
-            AlertIOS.alert('Login failed.');
-          }
+            
         }
+        else{
+          if(fm){
+            
+            if (Platform.OS === 'android') {
+              Alert.alert("Authentication","Incorrect Username or Password");
+            } else {
+              AlertIOS.alert('Login failed.');
+            }
+          }
+          setFm(true)
+        }
+        
 
       }
       
@@ -78,7 +79,7 @@ export const Login=()=> {
 
   return <ScrollView><View style={styles.mainContainer}>
   <View style={styles.container}>
-    <Image  source={require('../../assets/images/login.png')} style={styles.logo}/>
+    <Image  source={require('../../../assets/images/login.png')} style={styles.logo}/>
     </View>
     <View>
       <View>
@@ -117,4 +118,3 @@ export const Login=()=> {
   </View>
   </ScrollView>
 }
-

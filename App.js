@@ -6,6 +6,8 @@
  */
 
 import React, { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import {
   Platform,
   Image,
@@ -19,6 +21,8 @@ import { Main } from './src/Main';
 
 const App=()=>{
 
-  return <Main/>
+  return <GestureHandlerRootView>
+    <Main/>
+    </GestureHandlerRootView>
 }
 export default App;

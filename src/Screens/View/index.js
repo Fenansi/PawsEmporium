@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView, View, Text, ActivityIndicator,Dimensions, TouchableOpacity } from "react-native";
-import Divider from "../Components/Divider";
+import { Image, ScrollView, View, Text, ActivityIndicator,Dimensions, TouchableOpacity, StyleSheet } from "react-native";
+import Divider from "../../Components/Divider";
 
 export default function Preview({ route }) {
     const {id}= route.params;
@@ -69,13 +69,28 @@ export default function Preview({ route }) {
             <Divider/>
             <View>
                 <Text style={{color:'#000',paddingLeft:10,fontSize:18,}}>Other Details : </Text>
-                <Text style={{color:'#000',paddingLeft:40,paddingTop:10,fontSize:14}}>Rating : {data.rating}</Text>
-                <Text style={{color:'#000',paddingLeft:40,paddingTop:10,fontSize:14}}>Description : {data.description}</Text>
-                <Text style={{color:'#000',paddingLeft:40,paddingTop:10,fontSize:14}}>discountPercentage : {data.discountPercentage}</Text>
-                <Text style={{color:'#000',paddingLeft:40,paddingTop:10,fontSize:14}}>stock : {data.stock}</Text>
-                <Text style={{color:'#000',paddingLeft:40,paddingTop:10,fontSize:14}}>Brand : {data.brand}</Text>
+                <Text style={viewStyle.basicItem}>Rating : {data.rating}</Text>
                 
+                <Text style={viewStyle.basicItem}>Discount Percentage : {data.discountPercentage}</Text>
+                <Text style={viewStyle.basicItem}>Stock : {data.stock}</Text>
+                <Text style={viewStyle.basicItem}>Brand : {data.brand}</Text>
+                <Text style={viewStyle.basicItemLast}>Description : {data.description}</Text>
             </View>
         </ScrollView>
     );
 }
+const viewStyle=StyleSheet.create({
+    basicItem:{
+        color:'#000',
+        paddingLeft:40,
+        paddingTop:10,
+        fontSize:14
+    },
+    basicItemLast:{
+        color:'#000',
+        paddingLeft:40
+        ,paddingTop:10,
+        fontSize:14,
+        paddingBottom:10
+    }
+})

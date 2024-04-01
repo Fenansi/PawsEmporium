@@ -1,10 +1,10 @@
-import React, { useEffect }  from 'react'
-import { Image, StyleSheet, Text, View,TextInput } from 'react-native'
+// import React  from 'react'
+import { StyleSheet } from 'react-native'
 export const styles=StyleSheet.create({
     mainContainer:{
       height:"100%",
       paddingHorizontal:30,
-      paddingTop:30,
+      paddingTop:35,
       backgroundColor:"#fff"
     },
   

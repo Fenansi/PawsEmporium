@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, ActivityIndicator, FlatList, RefreshControl } from 'react-native';
+import { View, ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, Image } from 'react-native';
 import Product from '../product';
-
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { stylesHome } from './style';
 export default function Home({ route }) {
     const { params } = route;
     console.log("Route params:", route.params);
     const {refresh}=route.params;
     console.log(refresh);
-    const [refreshing, setRefreshing] = useState(params?.refresh || false); // State to track refreshing status
+    const [refreshing, setRefreshing] = useState(params?.refresh || false);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const url = "https://dummyjson.com/products/";
@@ -19,12 +20,12 @@ export default function Home({ route }) {
           .then((json) => {
             setData(json.products);
             setLoading(false);
-            setRefreshing(false); // Set refreshing to false after data fetching is complete
+            setRefreshing(false); 
           })
           .catch((error) => {
             console.error(error);
             setLoading(false);
-            setRefreshing(false); // Set refreshing to false in case of error
+            setRefreshing(false); 
           });
       };
     
@@ -40,13 +41,14 @@ export default function Home({ route }) {
     
 
     const handleRefresh = () => {
-        setRefreshing(true); // Set refreshing to true when pull-to-refresh is triggered
-        fetchData(); // Fetch data again
+        setRefreshing(true); 
+        console.log("here")
+        fetchData(); 
     };
 
     if (loading) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+            <View style={localStyles.activityContainer}>
                 <ActivityIndicator color={'#000'} />
             </View>
         );
@@ -55,18 +57,49 @@ export default function Home({ route }) {
     const keyExtractor = (item) => item.id.toString();
 
     return (
+        <View style={{backgroundColor:'#fff'}}>
         <FlatList
             data={data}
             keyExtractor={keyExtractor}
             numColumns={2}
             estimatedItemSize={200}
             renderItem={({ item }) => <Product items={item} />}
-            refreshControl={ // Add RefreshControl to FlatList
+            refreshControl={ 
                 <RefreshControl
                     refreshing={refreshing}
-                    onRefresh={handleRefresh} // Call handleRefresh function when pull-to-refresh is triggered
+                    onRefresh={handleRefresh} 
                 />
             }
         />
+        <TouchableOpacity
+                style={localStyles.fab}
+                onPress={handleRefresh} >
+                <Image source={require('../../../assets/images/refresh.png')} style={localStyles.fabText}/>
+            </TouchableOpacity>
+        </View>
     );
 }
+const localStyles = StyleSheet.create({
+    activityContainer:{
+         flex: 1, 
+         justifyContent: 'center', 
+         alignItems: 'center', 
+         backgroundColor: '#fff' 
+        },
+    fab: {
+        position: 'absolute',
+        width: 60,
+        height: 60,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 20,
+        bottom: 20,
+        backgroundColor: '#0C3540',
+        borderRadius: 30,
+        elevation: 8,
+    },
+    fabText: {
+        height:22,
+        width:22
+    },
+});

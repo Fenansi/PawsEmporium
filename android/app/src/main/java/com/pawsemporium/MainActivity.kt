@@ -6,7 +6,7 @@ import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.ReactRootView
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
 import org.devio.rn.splashscreen.SplashScreen
-
+import com.oblador.vectoricons.VectorIconsPackage;
 class MainActivity : ReactActivity(), DefaultHardwareBackBtnHandler {
   
     override fun onCreate(savedInstanceState: Bundle?) {
