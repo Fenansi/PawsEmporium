@@ -15,10 +15,10 @@ NovaMarket is an Android utility app designed to enhance your online shopping ex
 ## Steps
 
 
-1.Install the app on your device.
-2.Run the app using 'npm start' or 'npx react-native run-android'.
-3.Log in using the following credentials:
-      -Username: "Fenansi"
-      -Password: "Fenansi@1234"
-4.View the product lists.
-5.Users can see product details.
+1.Install the app on your device.<br>
+2.Run the app using 'npm start' or 'npx react-native run-android'.<br>
+3.Log in using the following credentials:<br>
+      -Username: "Fenansi"<br>
+      -Password: "Fenansi@1234"<br>
+4.View the product lists.<br>
+5.Users can see product details.<br>
